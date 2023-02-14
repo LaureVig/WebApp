@@ -33,6 +33,8 @@ Pour les deux profils, un tableau de bord indiquera le nombre de fiches étudian
 - Lister l’ensemble des étudiants d’une promotion donnée,
 - Lister l’ensemble des étudiants ayant fait un stage dans une entreprise
 - Lister l’ensemble des étudiants d’une même TAF sur une période spécifique (par exemple l’ensemble des étudiants qui a suivi la TAF DCL de 2020 à 2023)
-etc. 
+etc.
+
 D’une manière générale, les fonctionnalités évoquées ici sont minimalistes, vous pouvez bien évidemment proposer des améliorations comme par exemple la recherche d’informations dans les rapports de stage déposés. 
+
 PS: Un très bon projet est un projet qui serait utilisable par un autre étudiant de l’école (i.e. qui n’aurait pas suivi le module).
