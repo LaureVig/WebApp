@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():  # put application's code here
-    return 'Hello World! Test commit'
+    return 'Hello World ! Test commit'
 
 
 if __name__ == '__main__':
