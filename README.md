@@ -38,7 +38,3 @@ etc.
 D’une manière générale, les fonctionnalités évoquées ici sont minimalistes, vous pouvez bien évidemment proposer des améliorations comme par exemple la recherche d’informations dans les rapports de stage déposés. 
 
 PS: Un très bon projet est un projet qui serait utilisable par un autre étudiant de l’école (i.e. qui n’aurait pas suivi le module).
-
-
-# TODO
-- J'en sais rien...
