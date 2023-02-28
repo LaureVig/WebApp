@@ -15,8 +15,8 @@ with app.test_request_context(): # (2) bloc exécuté à l'initialisation de Fla
 @app.route('/')
 def hello_world():
     tafs = Taf.query.all()
-    respo_dcl=q = db.query(Enseignant).join(Taf.taf_id).all()
-    return flask.render_template("complex_view.jinja2", tafs=tafs, respo_dcl=respo_dcl)
+    etudiant_nom = Etudiant.get_etudiants_par_nom("Robidou")
+    return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom )
 
 
 if __name__ == '__main__':

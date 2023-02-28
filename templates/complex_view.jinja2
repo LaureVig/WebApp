@@ -1,4 +1,7 @@
 {% for taf in tafs %}
-    * {{ taf.taf_nom}}
-    * {{ respo_dcl.ens_nom }}
+    * {{ taf.taf_nom}} <br>
+{% endfor %}
+{% for etudiant_nom in etudiants_nom %}
+    .. {{ etudiant_nom.etu_nom }} <br>
+    .. {{ etudiant_nom.etu_prenom }} <br>
 {% endfor %}
