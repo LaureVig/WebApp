@@ -1,3 +1,5 @@
+import string
+
 from database.database import db
 
 
@@ -10,13 +12,16 @@ class Etudiant(db.Model):
     etu_lien_taf = db.relationship('LienEtudiantTaf', backref='etudiant')
 
     def __repr__(self):
-        return '<Etudiant {}>'.format(self.nom)
+        return '<Etudiant {}>'.format(self.etu_nom)
 
-    """taf1 = 
-    taf2 = 
-    stageA1
-    stageA2
-    stageA3"""
+    def get_etudiants_par_promo(annee:int):
+        return db.session.query(Etudiant).join(Promotion).filter(Promotion.pro_annee==annee).all()
+
+    def get_etudiants_par_taf(taf_id:int):
+        return "Pas encore implémenté"
+
+    def get_etudiants_par_nom(nom:string):
+        return db.session.query(Etudiant).filter(Etudiant.etu_nom==nom)
 
 
 class Promotion(db.Model):
@@ -25,7 +30,7 @@ class Promotion(db.Model):
     pro_promotion = db.relationship('Etudiant', backref='promotion')
 
     def __repr__(self):
-        return '<Promotion {}>'.format(self.annee)
+        return '<Promotion {}>'.format(self.pro_annee)
 
 
 class Taf(db.Model):
