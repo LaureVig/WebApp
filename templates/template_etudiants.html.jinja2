@@ -1,0 +1,11 @@
+{% extends "view_layout.html.jinja2" %}
+{% set title = "Template Étudiants" %}
+{% set active_page = "view_etudiants" %}
+
+{% block body %}
+    {% for etudiant in etudiants %}
+        * {{ etudiant.etu_prenom }}
+        {{ etudiant.etu_nom }}
+        {{ etudiant.etu_mail }} <br>
+    {% endfor %}
+{% endblock %}
