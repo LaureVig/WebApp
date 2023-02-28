@@ -13,7 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)  # (1) flask prend en compte la base de donnee
 with app.test_request_context():  # (2) bloc exécuté à l'initialisation de Flask
     print("test")
-    # init_database()
+    init_database()
 
 
 @app.route('/test')

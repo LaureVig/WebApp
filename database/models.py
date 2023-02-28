@@ -13,7 +13,15 @@ class Etudiant(db.Model):
 
     def __repr__(self):
         return '<Etudiant {}>'.format(self.etu_nom)
-    #def __init__(self):
+
+    def add_etudiant(nom,prenom,mail,promo):
+        new_student = Etudiant()
+        new_student.etu_nom=nom
+        new_student.etu_mail=mail
+        new_student.etu_promotion_id=db.session.query(Promotion).filter(Promotion.pro_annee==promo).first().pro_id
+        new_student.etu_prenom=prenom
+        db.session.add(new_student)
+        db.session.commit()
 
 
     def get_etudiants_par_promo(annee:int):
