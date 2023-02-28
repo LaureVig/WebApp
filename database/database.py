@@ -15,7 +15,7 @@ def init_database():
     populate_database()
 
 def populate_database():
-    from database.models import Promotion, Etudiant, Taf,Stage, Entreprise, Personnel, Enseignant
+    from database.models import Promotion, Etudiant, Taf,Stage, Entreprise, Personnel, Enseignant, LienEtudiantTaf, LienUeTaf
     new_taf = Taf()
     new_taf.taf_nom='DCL'
     new_taf.taf_description="Developpement Collaboratif de Logiciels"
@@ -32,8 +32,13 @@ def populate_database():
     new_student.etu_prenom = "Hugo"
     new_student.etu_mail = "hugo.pichereau@imt-atlantique.net"
     new_student.etu_promotion_id =1
+    lien_stud1_taf1=LienEtudiantTaf()
+    lien_stud1_taf1.let_taf_id=1
+    lien_stud1_taf1.let_annee=2023
+    lien_stud1_taf1.let_etudiant_id=1
     # Ajout de la tache dans la base de donnees
     db.session.add(new_student)
+    db.session.add(lien_stud1_taf1)
 
     new_student2 = Etudiant()
     new_student2.etu_nom = "Vigouroux"

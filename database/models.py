@@ -44,6 +44,7 @@ class Taf(db.Model):
 class LienEtudiantTaf(db.Model):
     let_etudiant_id = db.Column(db.Integer, db.ForeignKey('etudiant.etu_id'), primary_key=True)
     let_taf_id = db.Column(db.Integer, db.ForeignKey('taf.taf_id'), primary_key=True)
+    let_annee = db.Column(db.Integer)
 
 
 class Enseignant(db.Model):
