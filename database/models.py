@@ -34,31 +34,33 @@ class Etudiant(db.Model):
 
     def sort_etudiants_par(colonne:str):
         liste_etudiants = db.session.query(Etudiant).all()
+        print(liste_etudiants)
         liste_noms = []
-        for etudiant in liste_etudiants :
-            if colonne=='etu_nom':
+        if colonne=='etu_nom':
+            for etudiant in liste_etudiants:
+                print("nom")
                 if etudiant.etu_nom not in liste_noms :
                     liste_noms.append(etudiant.etu_nom)
                 liste_noms.sort()
-                liste_resultat = []
-                for etudiant in liste_noms :
-                    if len(Etudiant.get_etudiants_par_nom(etudiant))==1:
-                        liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[0])
-                    elif len(Etudiant.get_etudiants_par_nom(etudiant))>1:
-                        for i in range(len(Etudiant.get_etudiants_par_nom(etudiant))):
-                            liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[i])
-            elif colonne=='etu_prenom':
+        elif colonne=='etu_prenom':
+            for etudiant in liste_etudiants:
+                print("prenom")
                 if etudiant.etu_prenom not in liste_noms :
                     liste_noms.append(etudiant.etu_prenom)
+                    print(liste_noms)
                 liste_noms.sort()
-                liste_resultat = []
-                for etudiant in liste_noms :
-                    if len(Etudiant.get_etudiants_par_nom(etudiant))==1:
-                        liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[0])
-                    elif len(Etudiant.get_etudiants_par_nom(etudiant))>1:
-                        for i in range(len(Etudiant.get_etudiants_par_nom(etudiant))):
-                            liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[i])
-            return liste_resultat
+        elif colonne=='etu_mail':
+            for etudiant in liste_etudiants:
+                print("mail")
+                if etudiant.etu_mail not in liste_noms :
+                    liste_noms.append(etudiant.etu_mail)
+                liste_noms.sort()
+        print(liste_noms)
+        liste_resultat = []
+        for etudiant in liste_noms :
+            for i in range(len(Etudiant.get_etudiants_par(colonne,etudiant))):
+                liste_resultat.append(Etudiant.get_etudiants_par(colonne,etudiant)[i])
+        return liste_resultat
 
 
 class Promotion(db.Model):
