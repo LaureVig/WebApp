@@ -22,25 +22,43 @@ class Etudiant(db.Model):
     def get_etudiants_par_taf(taf_id:int):
         return "Pas encore implémenté"
 
-    def get_etudiants_par_nom(nom:str):
-        return db.session.query(Etudiant).filter(Etudiant.etu_nom==nom).all()
+    def get_etudiants_par(colonne:str,searchfield:any):
+        if colonne=='etu_nom':
+            return db.session.query(Etudiant).filter(Etudiant.etu_nom==searchfield).all()
+        elif colonne=='etu_prenom':
+            return db.session.query(Etudiant).filter(Etudiant.etu_prenom == searchfield).all()
+        elif colonne=='etu_mail':
+            return db.session.query(Etudiant).filter(Etudiant.etu_mail == searchfield).all()
+        elif colonne =='etu_promotion_id':
+            return db.session.query(Etudiant).filter(Etudiant.etu_promotion_id == searchfield).all()
 
-    def sort_etudiants_par_nom(self):
+    def sort_etudiants_par(colonne:str):
         liste_etudiants = db.session.query(Etudiant).all()
         liste_noms = []
         for etudiant in liste_etudiants :
-            if etudiant.etu_nom not in liste_noms :
-                liste_noms.append(etudiant.etu_nom)
-        liste_noms.sort()
-        print(liste_noms)
-        liste_resultat = []
-        for etudiant in liste_noms :
-            if len(Etudiant.get_etudiants_par_nom(etudiant))==1:
-                liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[0])
-            elif len(Etudiant.get_etudiants_par_nom(etudiant))>1:
-                for i in range(len(Etudiant.get_etudiants_par_nom(etudiant))):
-                    liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[i])
-        return liste_resultat
+            if colonne=='etu_nom':
+                if etudiant.etu_nom not in liste_noms :
+                    liste_noms.append(etudiant.etu_nom)
+                liste_noms.sort()
+                liste_resultat = []
+                for etudiant in liste_noms :
+                    if len(Etudiant.get_etudiants_par_nom(etudiant))==1:
+                        liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[0])
+                    elif len(Etudiant.get_etudiants_par_nom(etudiant))>1:
+                        for i in range(len(Etudiant.get_etudiants_par_nom(etudiant))):
+                            liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[i])
+            elif colonne=='etu_prenom':
+                if etudiant.etu_prenom not in liste_noms :
+                    liste_noms.append(etudiant.etu_prenom)
+                liste_noms.sort()
+                liste_resultat = []
+                for etudiant in liste_noms :
+                    if len(Etudiant.get_etudiants_par_nom(etudiant))==1:
+                        liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[0])
+                    elif len(Etudiant.get_etudiants_par_nom(etudiant))>1:
+                        for i in range(len(Etudiant.get_etudiants_par_nom(etudiant))):
+                            liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[i])
+            return liste_resultat
 
 
 class Promotion(db.Model):
