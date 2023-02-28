@@ -10,12 +10,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = url_Laure
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app) # (1) flask prend en compte la base de donnee
 with app.test_request_context(): # (2) bloc exécuté à l'initialisation de Flask
- init_database()
+    print("test")
+    #init_database()
 
 @app.route('/')
 def hello_world():
     tafs = Taf.query.all()
-    etudiant_nom = Etudiant.get_etudiants_par_nom("Robidou")
+    etudiant_nom = Etudiant.sort_etudiants_par_nom(True)
     return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom )
 
 
