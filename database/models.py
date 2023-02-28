@@ -2,7 +2,7 @@
 
 from database.database import db
 
-
+#DIS-MOI QUE CA MARCHE STP !!!
 class Etudiant(db.Model):
     etu_id = db.Column(db.Integer, primary_key=True)
     etu_nom = db.Column(db.Text, nullable=False)
