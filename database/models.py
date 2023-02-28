@@ -1,4 +1,4 @@
-
+import string
 
 from database.database import db
 
@@ -13,8 +13,6 @@ class Etudiant(db.Model):
 
     def __repr__(self):
         return '<Etudiant {}>'.format(self.etu_nom)
-    #def __init__(self):
-
 
     def get_etudiants_par_promo(annee:int):
         return db.session.query(Etudiant).join(Promotion).filter(Promotion.pro_annee==annee).all()
@@ -22,25 +20,8 @@ class Etudiant(db.Model):
     def get_etudiants_par_taf(taf_id:int):
         return "Pas encore implémenté"
 
-    def get_etudiants_par_nom(nom:str):
-        return db.session.query(Etudiant).filter(Etudiant.etu_nom==nom).all()
-
-    def sort_etudiants_par_nom(self):
-        liste_etudiants = db.session.query(Etudiant).all()
-        liste_noms = []
-        for etudiant in liste_etudiants :
-            if etudiant.etu_nom not in liste_noms :
-                liste_noms.append(etudiant.etu_nom)
-        liste_noms.sort()
-        print(liste_noms)
-        liste_resultat = []
-        for etudiant in liste_noms :
-            if len(Etudiant.get_etudiants_par_nom(etudiant))==1:
-                liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[0])
-            elif len(Etudiant.get_etudiants_par_nom(etudiant))>1:
-                for i in range(len(Etudiant.get_etudiants_par_nom(etudiant))):
-                    liste_resultat.append(Etudiant.get_etudiants_par_nom(etudiant)[i])
-        return liste_resultat
+    def get_etudiants_par_nom(nom:string):
+        return db.session.query(Etudiant).filter(Etudiant.etu_nom==nom)
 
 
 class Promotion(db.Model):
