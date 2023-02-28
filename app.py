@@ -3,6 +3,8 @@ from flask import Flask
 from database.database import db, init_database
 from database.models import *
 
+# Ceci est un test !
+
 app = Flask(__name__)
 url_Laure = "sqlite:///C:\\Users\\laure\\Desktop\\WEBAPP\\WebApp\\database\\database.db"
 url_Hugo = "sqlite:///C:\\Users\\hugop\\OneDrive\\Documents\\GitHub\\WebApp\\database\\database.db"
@@ -11,7 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)  # (1) flask prend en compte la base de donnee
 with app.test_request_context():  # (2) bloc exécuté à l'initialisation de Flask
     print("test")
-    #init_database()
+    # init_database()
 
 
 @app.route('/test')
