@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <style>
+            .active {
+                font-weight: bold;
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+    <header>
+        {% macro set_active_if(variable, name) %}
+            {% if variable == name %}class="active"{% endif %}
+        {% endmacro %}
+        <a href="{{ url_for("view_etudiants") }}" {{ set_active_if(active_page, "view_etudiants") }}>Template Étudiants</a> |
+        <a href="{{ url_for("view_enseignants") }}" {{ set_active_if(active_page, "view_enseignants") }}>Template Enseignants</a>        <hr>
+    </header>
+    {% block body %}
+    {% endblock %}
+    </body>
+</html>
