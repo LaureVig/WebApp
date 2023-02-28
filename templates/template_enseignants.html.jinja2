@@ -1,0 +1,11 @@
+{% extends "view_layout.html.jinja2" %}
+{% set title = "Template Enseignants" %}
+{% set active_page = "view_enseignants" %}
+
+{% block body %}
+    {% for enseignant in enseignants %}
+        * {{ enseignant.ens_prenom }}
+        {{ enseignant.ens_nom }}
+        {{ enseignant.ens_mail }} <br>
+    {% endfor %}
+{% endblock %}
