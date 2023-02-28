@@ -15,7 +15,7 @@ def init_database():
     populate_database()
 
 def populate_database():
-    from database.models import Promotion, Etudiant, Taf,Stage, Entreprise, Personnel
+    from database.models import Promotion, Etudiant, Taf,Stage, Entreprise, Personnel, Enseignant
     new_taf = Taf()
     new_taf.taf_nom='DCL'
     new_taf.taf_description="Developpement Collaboratif de Logiciels"
@@ -71,4 +71,12 @@ def populate_database():
     new_stage.sta_tuteur=1
     new_stage.sta_ville="Lannilis"
     db.session.add(new_stage)
+
+    new_enseignant=Enseignant()
+    new_enseignant.ens_nom="Le Calvar"
+    new_enseignant.ens_prenom="Théo"
+    new_enseignant.ens_mail="theo.le-calvar@imt-atlantique.net"
+    db.session.add(new_enseignant)
+
+
     db.session.commit()  # Sauvegarde les informations dans la base de donnees

@@ -1,5 +1,7 @@
+import flask
 from flask import Flask
 from database.database import db, init_database
+from database.models import *
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///C:\\Users\\laure\\Desktop\\WEBAPP\\WebApp\\database\\database.db"
@@ -9,9 +11,9 @@ with app.test_request_context(): # (2) bloc exécuté à l'initialisation de Fla
  init_database()
 
 @app.route('/')
-def hello_world():  # put application's code here
-
-    return 'Hello World ! Test commit'
+def hello_world():
+    tafs = Taf.query.all()
+    return flask.render_template("complex_view.jinja2", tafs=tafs)
 
 
 if __name__ == '__main__':
