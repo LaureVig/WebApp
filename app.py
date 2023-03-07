@@ -19,21 +19,6 @@ with app.test_request_context():  # (2) bloc exécuté à l'initialisation de Fl
     init_database()
 
 
-@app.route('/test')
-def hello_world():
-    tafs = Taf.query.all()
-    etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
-    return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
-
-
-@app.route('/test', methods=['POST'])
-def resultat():
-    tafs = Taf.query.all()
-    etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
-    result = flask.request.form
-    Promotion.ajouterPromo(annee=int(result['annee']))
-    return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
-
 
 @app.route('/')
 @app.route('/view/etudiants')
