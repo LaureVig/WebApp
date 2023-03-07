@@ -3,9 +3,25 @@
 {% set active_page = "view_enseignants" %}
 
 {% block body %}
-    {% for enseignant in enseignants %}
-        * {{ enseignant.ens_prenom }}
-        {{ enseignant.ens_nom }}
-        {{ enseignant.ens_mail }} <br>
-    {% endfor %}
+    <h1> Liste enseignants </h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enseignant in enseignants %}
+                <tr>
+                    <th scope="row">{{ enseignant.ens_id }}</th>
+                    <td>{{ enseignant.ens_prenom }}</td>
+                    <td>{{ enseignant.ens_nom }}</td>
+                    <td>{{ enseignant.ens_mail }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
