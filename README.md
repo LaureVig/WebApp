@@ -41,6 +41,6 @@ PS: Un très bon projet est un projet qui serait utilisable par un autre étudia
 
 
 # TODO
-- finir les fonctions de delete, et d'update
+- finir les fonctions d'update
 - finir les fonctions de tri et filtrage
 - créer un getbyid pour chaque (pour sélectionner dans le front)
