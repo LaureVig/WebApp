@@ -1,0 +1,12 @@
+{% extends "view_layout.html.jinja2" %}
+{% set title = "Ajout Étudiants" %}
+{% set active_page = "view_etudiants" %}
+
+{% block body %}
+    <form action="ajout/etudiant" method="post">
+    {#Je te laisse faire la suite du formulaire, à voir commment récupérer ça après#}
+        <label>Ajout d'une promotion</label>
+        <input type="number" name="annee" id="annee">
+        <input type="submit" value="Ajouter">
+    </form>
+{% endblock %}
