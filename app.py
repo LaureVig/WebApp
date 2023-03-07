@@ -2,6 +2,9 @@ import flask
 from flask import Flask
 from database.database import db, init_database
 from database.models import *
+from flask import url_for
+
+
 
 # Ceci est un test !
 
@@ -22,13 +25,15 @@ def hello_world():
     etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
     return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
 
-@app.route('/test',methods = ['POST'])
+
+@app.route('/test', methods=['POST'])
 def resultat():
     tafs = Taf.query.all()
     etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
     result = flask.request.form
     Promotion.ajouterPromo(annee=int(result['annee']))
     return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
+
 
 @app.route('/')
 @app.route('/view/etudiants')
@@ -41,6 +46,7 @@ def view_etudiants():
 def view_enseignants():
     enseignants = Enseignant.query.all()
     return flask.render_template("template_enseignants.html.jinja2", enseignants=enseignants)
+
 
 @app.route('/ajout/etudiant')
 def ajout_etudiant():
