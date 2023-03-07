@@ -13,7 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)  # (1) flask prend en compte la base de donnee
 with app.test_request_context():  # (2) bloc exécuté à l'initialisation de Flask
     print("test")
-    # init_database()
+    init_database()
 
 
 @app.route('/test')
@@ -22,6 +22,13 @@ def hello_world():
     etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
     return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
 
+@app.route('/test',methods = ['POST'])
+def resultat():
+    tafs = Taf.query.all()
+    etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
+    result = flask.request.form
+    Promotion.ajouterPromo(annee=int(result['annee']))
+    return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
 
 @app.route('/')
 @app.route('/view/etudiants')
@@ -34,6 +41,15 @@ def view_etudiants():
 def view_enseignants():
     enseignants = Enseignant.query.all()
     return flask.render_template("template_enseignants.html.jinja2", enseignants=enseignants)
+
+@app.route('/ajout/etudiant')
+def ajout_etudiant():
+    return flask.render_template("formulaire_etudiant.html.jinja2")
+@app.route('/details/etudiant/<int:id>')
+def detail_etudiant(id):
+    etudiant=Etudiant.get_by_id(id)
+    print(etudiant)
+    return flask.render_template("details_etudiant.html.jinja2",etudiant=etudiant)
 
 
 if __name__ == '__main__':
