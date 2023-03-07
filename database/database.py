@@ -32,6 +32,9 @@ def populate_database():
     Stage.ajouterStage("Trecobat","Grijol","développement web",5,"Lannilis")
 
     Enseignant.ajouterEnseignant("Le Calvar","Théo","theo.le-calvar@imt-atlantique.net","admin")
+    Enseignant.ajouterEnseignant("Lèbre","Adrien","adrien.lebre@imt-atlantique.fr","admin")
+    Enseignant.ajouterEnseignant("Südholt","Mario","mario.sudholt@imt-atlantique.fr","admin")
+    Enseignant.ajouterEnseignant("Royer","Antoine","antoine.w.royer@gmail.com","admin")
 
     Ue.ajouterUe("WEBAPP","Découverte du développement web","Le Calvar")
 
