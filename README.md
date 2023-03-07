@@ -21,7 +21,8 @@ L’administrateur devra être en mesure de créer :
 - Créer/modifier/supprimer des promotions
 - Créer/modifier/supprimer des étudiants
 - Créer/modifier/supprimer des TAFs
-- Créer/modifier/supprimer des entreprises
+- Créer/modifier/supprimer des entreprises 
+
 Les utilisateurs (i.e. les étudiants)  devront être en mesure de venir renseigner/modifier : 
 - Leur état civil
 - les TAF qu’il/elle aura suivi lors de son parcours 
@@ -29,6 +30,7 @@ Les utilisateurs (i.e. les étudiants)  devront être en mesure de venir renseig
 - l’entreprise dans lequel il a fait son stage 
 - les coordonnées de son tuteur. Si l’entreprise n’existe pas dans le système, il devra être en mesure de la créer (vous prendrez le soin d'éviter la création de doublons en retournant les noms d’entreprises qui se rapprochent de la syntaxe donnée par l’étudiant : exemple Dassault vs dassault systèmes).
 - Leur position actuelle (ingénieur, chef de projet, etc. dans telle entreprise). 
+
 Pour les deux profils, un tableau de bord indiquera le nombre de fiches étudiants dans le système d’informations, et le nombre d’entreprises. Via ce même tableau de bord, l’administrateur ou les utilisateurs devront pouvoir faire des recherches spécifiques, comme par exemple : 
 - Lister l’ensemble des étudiants d’une promotion donnée,
 - Lister l’ensemble des étudiants ayant fait un stage dans une entreprise
