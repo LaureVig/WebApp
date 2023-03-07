@@ -142,6 +142,10 @@ class Enseignant(db.Model):
         new_ens.ens_utilisateur= db.session.query(Utilisateur).filter(Utilisateur.uti_login==login).first().uti_id
         db.session.add(new_ens)
         db.session.commit()
+
+    def supprimerEnseignant(id:int):
+        ens = db.session.query(Enseignant).filter(Enseignant.ens_id==id).first()
+        db.session.delete(ens)
     def __repr__(self):
         return '<Enseignant {}>'.format(self.ens_nom)
 
@@ -154,6 +158,10 @@ class Domaine(db.Model):
         new_dom.dom_nom=nom
         db.session.add(new_dom)
         db.session.commit()
+
+    def supprimerDomaine(id:int):
+        domaine= db.session.query(Domaine).filter(Domaine.dom_id==id).first()
+        db.session.delete(domaine)
 
     def __repr__(self):
         return '<Domaine {}>'.format(self.dom_nom)
@@ -176,7 +184,9 @@ class Stage(db.Model):
         db.session.add(new_stage)
         db.session.commit()
 
-
+    def supprimerStage(id:int):
+        stage = db.session.query(Stage).filter(Stage.sta_id==id).first()
+        db.session.delete(stage)
 class Ue(db.Model):
     ue_id = db.Column(db.Integer, primary_key=True)
     ue_nom = db.Column(db.Text)
@@ -191,6 +201,9 @@ class Ue(db.Model):
         db.session.add(new_ue)
         db.session.commit()
 
+    def supprimerUe(id:int):
+        ue = db.session.query(Ue).filter(Ue.ue_id==id).first()
+        db.session.delete(ue)
 
 class LienUeTaf(db.Model):
     lut_ue_id = db.Column(db.Integer, db.ForeignKey('ue.ue_id'), primary_key=True)
@@ -213,6 +226,10 @@ class Entreprise(db.Model):
         db.session.add(new_ent)
         db.session.commit()
 
+    def supprimerEntreprise(id:int):
+        entreprise = db.session.query(Entreprise).filter(Entreprise.ent_id==id).first()
+        db.session.delete(entreprise)
+
 class Personnel(db.Model):
     per_id = db.Column(db.Integer, primary_key=True)
     per_nom =db.Column(db.Text)
@@ -228,6 +245,10 @@ class Personnel(db.Model):
         new_personnel.per_entreprise=db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
         db.session.add(new_personnel)
         db.session.commit()
+
+    def supprimerPersonnel(id:int):
+        perso = db.session.query(Personnel).filter(Personnel.per_id==id).first()
+        db.session.delete(perso)
 
 class LienRoleUtilisateur(db.Model):
     lru_role = db.Column(db.Integer, db.ForeignKey('role.rol_id'), primary_key=True)
@@ -250,6 +271,10 @@ class Role(db.Model):
         db.session.add(new_role)
         db.session.commit()
 
+    def supprimerRole(id:int):
+        role = db.session.query(Role).filter(Role.rol_id==id).first()
+        db.session.delete(role)
+
 class Utilisateur(db.Model):
     uti_id = db.Column(db.Integer, primary_key=True)
     uti_login = db.Column(db.Text)
@@ -262,6 +287,10 @@ class Utilisateur(db.Model):
         db.session.add(new_user)
         db.session.commit()
 
+    def supprimerUtilisateur(id:int):
+        user = db.session.query(Utilisateur).filter(Utilisateur.uti_id==id).first()
+        db.session.delete(user)
+
 class Position(db.Model):
     pos_id = db.Column(db.Integer, primary_key=True)
     pos_nom = db.Column(db.Text)
@@ -273,3 +302,7 @@ class Position(db.Model):
         new_pos.pos_entreprise= db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
         db.session.add(new_pos)
         db.session.commit()
+
+    def supprimerPosition(id:int):
+        position = db.session.query(Position).filter(Position.pos_id==id).first()
+        db.session.delete(position)
