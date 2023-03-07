@@ -47,7 +47,7 @@ class Etudiant(db.Model):
         return "Pas encore implémenté"
 
     def supprimerEtudiant(id:int):
-        etudiant = db.session.query(Etudiant).filter(Etudiant.etu_id==id).first()
+        Etudiant.get_by_id(id)
         db.session.delete(etudiant)
 
     def get_etudiants_par(colonne:str,searchfield:any):
@@ -84,6 +84,34 @@ class Etudiant(db.Model):
                 liste_resultat.append(Etudiant.get_etudiants_par(colonne,etudiant)[i])
         return liste_resultat
 
+    def get_by_id(id:int):
+        return db.session.query(Etudiant).filter(Etudiant.etu_id == id).first()
+
+    def modifierEtudiant(self,nom="null",prenom="null",mail="null",login:str="null",promo:int="null",position:str="null",taf_id1="null",taf_id2="null",stage1="null",stage2="null",stage3="null"):
+        if nom!="null":
+            self.etu_nom=nom
+        if prenom!="null":
+            self.etu_prenom=prenom
+        if mail!="null":
+            self.etu_mail=mail
+        if login!="null":
+            self.etu_utilisateur=db.session.query(Utilisateur).filter(Utilisateur.uti_login==login).first().uti_id
+        if position!="null":
+            self.etu_position_id=db.session.query(Position).filter(Position.pos_id==position).first().pos_id
+        if promo!="null":
+            self.etu_promotion_id=db.session.query(Promotion).filter(Promotion.pro_annee==promo).first().pro_annee
+        if taf_id1!="null":
+            self.etu_taf1=taf_id1
+        if taf_id2!="null":
+            self.etu_taf2=taf_id2
+        if stage1!="null":
+            self.etu_stage1=stage1
+        if stage2!="null":
+            self.etu_stage2=stage2
+        if stage3!="null":
+            self.etu_stage3=stage3
+        db.session.add(self)
+        db.session.commit()
 
 class Promotion(db.Model):
     pro_annee = db.Column(db.Integer, nullable=False,  primary_key=True)
@@ -98,6 +126,12 @@ class Promotion(db.Model):
     def supprimerPromo(id: int):
         promo = db.session.query(Promotion).filter(Promotion.pro_id == id).first()
         db.session.delete(promo)
+
+    def modifierPromotion(self,annee="null"):
+        if annee!="null":
+            self.pro_annee=annee
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return '<Promotion {}>'.format(self.pro_annee)
@@ -127,6 +161,18 @@ class Taf(db.Model):
         taf = db.session.query(Taf).filter(Taf.taf_id==id).first()
         db.session.delete(taf)
 
+    def modifierTaf(self,nom="null",description="null",respo="null",domaine="null"):
+        if nom!="null":
+            self.taf_nom=nom
+        if description!="null":
+            self.taf_description=description
+        if respo!="null":
+            self.taf_responsable_id = respo
+        if domaine!="null":
+            self.taf_domaine_id = domaine
+        db.session.add(self)
+        db.session.commit()
+
 class Enseignant(db.Model):
     ens_id = db.Column(db.Integer, primary_key=True)
     ens_nom = db.Column(db.Text, nullable=False)
@@ -146,6 +192,19 @@ class Enseignant(db.Model):
     def supprimerEnseignant(id:int):
         ens = db.session.query(Enseignant).filter(Enseignant.ens_id==id).first()
         db.session.delete(ens)
+
+    def modifierEnseignant(self,nom:str,prenom:str,mail:str,login:str):
+        if nom != "null":
+            self.ens_nom=nom
+        if prenom != "null":
+            self.ens_prenom=prenom
+        if mail != "null":
+            self.ens_mail=mail
+        if login != "null":
+            self.ens_utilisateur= db.session.query(Utilisateur).filter(Utilisateur.uti_login==login).first().uti_id
+        db.session.add(self)
+        db.session.commit()
+
     def __repr__(self):
         return '<Enseignant {}>'.format(self.ens_nom)
 
@@ -163,6 +222,11 @@ class Domaine(db.Model):
         domaine= db.session.query(Domaine).filter(Domaine.dom_id==id).first()
         db.session.delete(domaine)
 
+    def modifierDomaine(self,nom="null"):
+        if nom!="null":
+            self.dom_nom=nom
+        db.session.add(self)
+        db.session.commit()
     def __repr__(self):
         return '<Domaine {}>'.format(self.dom_nom)
 
@@ -187,6 +251,21 @@ class Stage(db.Model):
     def supprimerStage(id:int):
         stage = db.session.query(Stage).filter(Stage.sta_id==id).first()
         db.session.delete(stage)
+
+    def modifierStage(self,entreprise="null",tuteur="null",mission="null",duree="null",ville="null"):
+        if entreprise!= "null":
+            self.sta_entreprise=db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
+        if tuteur != "null":
+            self.sta_tuteur=db.session.query(Personnel).filter(Personnel.per_nom==tuteur).first().per_id
+        if mission != "null":
+            self.sta_mission=mission
+        if duree != "null":
+            self.sta_duree=duree
+        if ville != "null":
+            self.sta_ville=ville
+        db.session.add(self)
+        db.session.commit()
+
 class Ue(db.Model):
     ue_id = db.Column(db.Integer, primary_key=True)
     ue_nom = db.Column(db.Text)
@@ -204,6 +283,16 @@ class Ue(db.Model):
     def supprimerUe(id:int):
         ue = db.session.query(Ue).filter(Ue.ue_id==id).first()
         db.session.delete(ue)
+
+    def modifierUe(self,nom="null",desription="null",respo="null"):
+        if nom!= "null":
+            self.ue_nom=nom
+        if description != "null":
+            self.ue_description=desription
+        if respo != "null":
+            self.ue_responsable_id=db.session.query(Enseignant).filter(Enseignant.ens_nom==respo).first().ens_id
+        db.session.add(self)
+        db.session.commit()
 
 class LienUeTaf(db.Model):
     lut_ue_id = db.Column(db.Integer, db.ForeignKey('ue.ue_id'), primary_key=True)
@@ -230,6 +319,13 @@ class Entreprise(db.Model):
         entreprise = db.session.query(Entreprise).filter(Entreprise.ent_id==id).first()
         db.session.delete(entreprise)
 
+    def modifierEntreprise(self,nom:str):
+        if nom != "null":
+            self.ent_nom=nom
+        db.session.add(self)
+        db.session.commit()
+
+
 class Personnel(db.Model):
     per_id = db.Column(db.Integer, primary_key=True)
     per_nom =db.Column(db.Text)
@@ -249,6 +345,18 @@ class Personnel(db.Model):
     def supprimerPersonnel(id:int):
         perso = db.session.query(Personnel).filter(Personnel.per_id==id).first()
         db.session.delete(perso)
+
+    def modifierPersonnel(self,nom:str="null",prenom:str="null",mail:str="null",entreprise:str="null"):
+        if nom != "null":
+            self.per_nom=nom
+        if prenom != "null":
+            self.per_prenom=prenom
+        if mail != "null":
+            self.per_mail=mail
+        if entreprise != "null":
+            self.per_entreprise=db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
+        db.session.add(self)
+        db.session.commit()
 
 class LienRoleUtilisateur(db.Model):
     lru_role = db.Column(db.Integer, db.ForeignKey('role.rol_id'), primary_key=True)
@@ -275,6 +383,12 @@ class Role(db.Model):
         role = db.session.query(Role).filter(Role.rol_id==id).first()
         db.session.delete(role)
 
+    def modifierRole(self,nom ="null"):
+        if nom != "null":
+            self.rol_nom=nom
+            db.session.add(self)
+            db.session.commit()
+
 class Utilisateur(db.Model):
     uti_id = db.Column(db.Integer, primary_key=True)
     uti_login = db.Column(db.Text)
@@ -291,6 +405,14 @@ class Utilisateur(db.Model):
         user = db.session.query(Utilisateur).filter(Utilisateur.uti_id==id).first()
         db.session.delete(user)
 
+    def modifierUtilisateur(self,login="null",mdp="null"):
+         if login!="null":
+            self.uti_login = login
+         if mdp != "null":
+            self.uti_mdp = mdp
+         db.session.add(self)
+         db.session.commit()
+
 class Position(db.Model):
     pos_id = db.Column(db.Integer, primary_key=True)
     pos_nom = db.Column(db.Text)
@@ -306,3 +428,11 @@ class Position(db.Model):
     def supprimerPosition(id:int):
         position = db.session.query(Position).filter(Position.pos_id==id).first()
         db.session.delete(position)
+
+    def modifierPosition(self,nom:str="null",entreprise:str="null"):
+        if nom != "null":
+            self.pos_nom=nom
+        if entreprise != "null":
+            self.pos_entreprise= db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
+        db.session.add(self)
+        db.session.commit()

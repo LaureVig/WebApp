@@ -25,8 +25,6 @@ def populate_database():
     Etudiant.ajouterEtudiant("Vigouroux","Laure","laure.vigouroux@imt-atlantique.net","admin",2024)
     Etudiant.ajouterEtudiant("Robidou","Guillaume","guillaume.robidou@imt-atlantique.net","admin",2024)
 
-    Etudiant.supprimerEtudiant(2)
-
     Entreprise.ajouterEntreprise("Trecobat")
 
     Personnel.ajouterPersonnel("Grijol","benjamin@trecobat.fr","Benjamin","Trecobat")
