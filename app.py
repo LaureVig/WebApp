@@ -27,7 +27,7 @@ def resultat():
     tafs = Taf.query.all()
     etudiant_nom = Etudiant.sort_etudiants_par('etu_prenom')
     result = flask.request.form
-    Promotion.ajouterPromo(annee=result['annee'])
+    Promotion.ajouterPromo(annee=int(result['annee']))
     return flask.render_template("complex_view.jinja2", tafs=tafs, etudiants_nom=etudiant_nom)
 
 @app.route('/')
@@ -42,6 +42,9 @@ def view_enseignants():
     enseignants = Enseignant.query.all()
     return flask.render_template("template_enseignants.html.jinja2", enseignants=enseignants)
 
+@app.route('/ajout/etudiant')
+def ajout_etudiant():
+    return flask.render_template("formulaire_etudiant.html.jinja2")
 
 if __name__ == '__main__':
     app.run()
