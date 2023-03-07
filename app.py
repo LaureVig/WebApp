@@ -46,5 +46,13 @@ def view_enseignants():
 def ajout_etudiant():
     return flask.render_template("formulaire_etudiant.html.jinja2")
 
+@app.route('/details/etudiant/<int:id>')
+def detail_etudiant(id):
+    etudiant=Etudiant.get_by_id(id)
+    print(etudiant)
+    return flask.render_template("details_etudiant.html.jinja2",etudiant=etudiant)
+
+
+
 if __name__ == '__main__':
     app.run()

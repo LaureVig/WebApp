@@ -1,0 +1,8 @@
+{% extends "view_layout.html.jinja2" %}
+{% set title = "Template Étudiants" %}
+{% set active_page = "view_etudiants" %}
+
+{% block body %}
+    <h1>Détails étudiant</h1>
+    {{ etudiant.etu_nom }}
+{% endblock %}

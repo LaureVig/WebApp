@@ -3,9 +3,27 @@
 {% set active_page = "view_etudiants" %}
 
 {% block body %}
-    {% for etudiant in etudiants %}
-        * {{ etudiant.etu_prenom }}
-        {{ etudiant.etu_nom }}
-        {{ etudiant.etu_mail }} <br>
-    {% endfor %}
+    <h1>Liste des étudiants</h1>
+
+   <table class="table">
+       <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Mail</th>
+            </tr>
+       </thead>
+        <tbody>
+            {% for etudiant in etudiants %}
+                <tr id="{{ etudiant.etu_id }}">
+                    <td>{{ etudiant.etu_prenom }}</td>
+                    <td>{{ etudiant.etu_nom }}</td>
+                    <td>{{ etudiant.etu_mail }} </td>
+                    <td><a href="/details/etudiant/{{ etudiant.etu_id }}">Détails</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}
