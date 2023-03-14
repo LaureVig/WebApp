@@ -26,6 +26,7 @@ class Etudiant(db.Model):
         new_student.etu_prenom=prenom
         new_student.etu_mail=mail
         new_student.etu_utilisateur=db.session.query(Utilisateur).filter(Utilisateur.uti_login==login).first().uti_id
+        print(position)
         if position!="null":
             new_student.etu_position_id=db.session.query(Position).filter(Position.pos_id==position).first().pos_id
         else :
@@ -133,6 +134,11 @@ class Promotion(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def getAllPromotion():
+        return db.session.query(Promotion).all()
+    def get_by_id(id: int):
+        return db.session.query(Promotion).filter(Promotion.pro_annee == id).first()
+
     def __repr__(self):
         return '<Promotion {}>'.format(self.pro_annee)
 
@@ -161,6 +167,9 @@ class Taf(db.Model):
         taf = db.session.query(Taf).filter(Taf.taf_id==id).first()
         db.session.delete(taf)
 
+    def getAllTaf():
+        return db.session.query(Taf).all()
+
     def modifierTaf(self,nom="null",description="null",respo="null",domaine="null"):
         if nom!="null":
             self.taf_nom=nom
@@ -173,6 +182,8 @@ class Taf(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def get_by_id(id: int):
+        return db.session.query(Taf).filter(Taf.taf_id == id).first()
 class Enseignant(db.Model):
     ens_id = db.Column(db.Integer, primary_key=True)
     ens_nom = db.Column(db.Text, nullable=False)
@@ -205,6 +216,9 @@ class Enseignant(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def getAllEnseignant():
+        return db.session.query(Enseignant).all()
+
     def __repr__(self):
         return '<Enseignant {}>'.format(self.ens_nom)
 
@@ -227,6 +241,9 @@ class Domaine(db.Model):
             self.dom_nom=nom
         db.session.add(self)
         db.session.commit()
+
+    def getAllDomaine():
+        return db.session.query(Domaine).all()
     def __repr__(self):
         return '<Domaine {}>'.format(self.dom_nom)
 
@@ -266,6 +283,12 @@ class Stage(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def get_by_id(id: int):
+        return db.session.query(Stage).filter(Stage.sta_id == id).first()
+
+    def getAllStage():
+        return db.session.query(Stage).all()
+
 class Ue(db.Model):
     ue_id = db.Column(db.Integer, primary_key=True)
     ue_nom = db.Column(db.Text)
@@ -293,6 +316,9 @@ class Ue(db.Model):
             self.ue_responsable_id=db.session.query(Enseignant).filter(Enseignant.ens_nom==respo).first().ens_id
         db.session.add(self)
         db.session.commit()
+
+    def getAllUe():
+        return db.session.query(Ue).all()
 
 class LienUeTaf(db.Model):
     lut_ue_id = db.Column(db.Integer, db.ForeignKey('ue.ue_id'), primary_key=True)
@@ -324,6 +350,9 @@ class Entreprise(db.Model):
             self.ent_nom=nom
         db.session.add(self)
         db.session.commit()
+
+    def getAllEntreprise():
+        return db.session.query(Entreprise).all()
 
 
 class Personnel(db.Model):
@@ -357,6 +386,9 @@ class Personnel(db.Model):
             self.per_entreprise=db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
         db.session.add(self)
         db.session.commit()
+
+    def getAllPersonnem():
+        return db.session.query(Personnel).all()
 
 class LienRoleUtilisateur(db.Model):
     lru_role = db.Column(db.Integer, db.ForeignKey('role.rol_id'), primary_key=True)
@@ -436,3 +468,9 @@ class Position(db.Model):
             self.pos_entreprise= db.session.query(Entreprise).filter(Entreprise.ent_nom==entreprise).first().ent_id
         db.session.add(self)
         db.session.commit()
+
+    def getAllPosition():
+        return db.session.query(Position).all()
+
+    def get_by_id(id: int):
+        return db.session.query(Position).filter(Position.pos_id == id).first()

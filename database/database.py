@@ -12,7 +12,7 @@ def init_database():
     populate_database()
 
 def populate_database():
-    from database.models import Promotion, Role, Utilisateur, LienRoleUtilisateur, Etudiant, Taf,Stage, Entreprise, Personnel, Domaine, Enseignant, Ue, LienUeTaf
+    from database.models import Promotion, Position, Role, Utilisateur, LienRoleUtilisateur, Etudiant, Taf,Stage, Entreprise, Personnel, Domaine, Enseignant, Ue, LienUeTaf
 
     Taf.ajouterTaf('DCL',"Developpement Collaboratif de Logiciels",1,1)
 
@@ -39,6 +39,8 @@ def populate_database():
     Ue.ajouterUe("WEBAPP","Découverte du développement web","Le Calvar")
 
     LienUeTaf.ajouterLienUeTaf("WEBAPP","DCL")
+
+    Position.ajouterPosition("test","Trecobat")
 
     Domaine.ajouterDomaine("Informatique")
 

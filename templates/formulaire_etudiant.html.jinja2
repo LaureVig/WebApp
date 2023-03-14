@@ -3,10 +3,152 @@
 {% set active_page = "view_etudiants" %}
 
 {% block body %}
-    <form action="ajout/etudiant" method="post">
-    {#Je te laisse faire la suite du formulaire, à voir commment récupérer ça après#}
-        <label>Ajout d'une promotion</label>
-        <input type="number" name="annee" id="annee">
-        <input type="submit" value="Ajouter">
+    <h1>Ajouter un étudiant</h1>
+    <form action="{{ url_for('add_etudiant') }}" method="post">
+        <div class="row">
+            <div class="col col-3">
+                Nom
+            </div>
+            <div class="col col-3">
+                <input class="form-control" type="text" name="nom" value="{{ form.nom }}">
+            </div>
+            <div class="col col-3">
+                Prénom
+            </div>
+            <div class="col col-3">
+                <input class="form-control" type="text" name="prenom" value="{{ form.prenom }}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-2">
+                Promotion
+            </div>
+            <div class="col col-2">
+            <p>La valeur sélectionnée est : {{ form['promotion'] }}</p>
+                <select class="form-control" name="promotion" >
+                    <option value="">Choisir...</option>
+                    {% for  promotion in promotions %}
+                            {%  if form['promotion'] and form['promotion']== promotion %}
+                                <option value="{{ promotion }}" selected>{{ promotion }}</option>
+                            {% else %}
+                                <option value="{{ promotion }}">{{ promotion }}</option>
+                            {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-2">
+                TAF 2A
+            </div>
+            <div class="col col-2">
+                <select class="form-control" name="taf1">
+                    <option value="">--Please choose an option--</option>
+                    {% for  taf in tafs %}
+                        {% if form.taf1==taf %}
+                            <option value="{{ taf.taf_id }}" selected>{{ taf.taf_nom }}</option>
+                        {% else %}
+                            <option value="{{ taf.taf_id }}">{{ taf.taf_nom }}</option>
+                        {% endif %}
+                        <option value="{{ taf.taf_id }}">{{ taf.taf_nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-2">
+                TAF 3A
+            </div>
+            <div class="col col-2">
+                <select class="form-control" name="taf2">
+                    <option value="">--Please choose an option--</option>
+                    {% for  taf in tafs %}
+                        {% if form.taf2==taf %}
+                            <option value="{{ taf.taf_id }}" selected>{{ taf.taf_nom }}</option>
+                        {% else %}
+                            <option value="{{ taf.taf_id }}">{{ taf.taf_nom }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-2">
+                <label for="stage1">Stage 1A</label>
+            </div>
+            <div class="col col-2">
+                <select class="form-control" name="stage1">
+                    <option value="">--Please choose an option--</option>
+                    {% for  stage in stages %}
+                        {% if form.stage1==stage %}
+                            <option value="{{ stage.sta_id }}" selected>{{ stage.sta_mission }}</option>
+                        {% else %}
+                            <option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>
+                        {% endif %}
+                        <option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-2">
+                Stage 2A
+            </div>
+            <div class="col col-2">
+                <select class="form-control" name="stage2">
+                    <option value="">--Please choose an option--</option>
+                    {% for  stage in stages %}
+                        {% if form.stage2==stage %}
+                            <option value="{{ stage.sta_id }}" selected>{{ stage.sta_mission }}</option>
+                        {% else %}
+                            <option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-2">
+                Stage 3A
+            </div>
+            <div class="col col-2">
+                <select class="form-control" name="stage3">
+                    <option value="null">--Please choose an option--</option>
+                    {% for  stage in stages %}
+                        {% if form.stage3==stage %}
+                            <option value="{{ stage.sta_id }}" selected>{{ stage.sta_mission }}</option>
+                        {% else %}
+                            <option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-2">
+                Adresse email
+            </div>
+            <div class="col col-2">
+                <input class="form-control" type="email" name="mail" value="{{ form.mail }}">
+            </div>
+            <div class="col col-2">
+                Position actuelle
+            </div>
+            <div class="col col-2">
+                <select class="form-control" name="position">
+                    <option value="null">--Please choose an option--</option>
+                    {% for  position in positions %}
+                        {% if form.position==position.pos_id %}
+                            <option value="{{ position.pos_id }}" selected>{{ position.pos_nom }}</option>
+                        {% else %}
+                            <option value="{{ position.pos_id }}">{{ position.pos_nom }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {% if errors %}
+                Errors:
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="col col-2">
+                <input class="form-control" type="submit" value="Ajouter">
+            </div>
+        </div>
     </form>
 {% endblock %}
