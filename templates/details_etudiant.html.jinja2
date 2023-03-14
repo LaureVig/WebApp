@@ -1,8 +1,102 @@
 {% extends "view_layout.html.jinja2" %}
-{% set title = "Template Étudiants" %}
+{% set title = "Détails étudiant" %}
 {% set active_page = "view_etudiants" %}
 
 {% block body %}
-    <h1>Détails étudiant</h1>
-    {{ etudiant.etu_nom }}
+    <h2 style="text-align: center">{{ etudiant.etu_prenom }} {{ etudiant.etu_nom }}</h2>
+    <div class="tableau">
+    <div class="row">
+        <div class="col col-2">
+            Promotion
+        </div>
+        <div class="col col-2">
+            {{ etudiant.etu_promotion_id }}
+        </div>
+        <div class="col col-2">
+            TAF 2A
+        </div>
+        <div class="col col-2">
+            {{ taf1.taf_nom }}
+        </div>
+        <div class="col col-2">
+            TAF 3A
+        </div>
+        <div class="col col-2">
+            {{ taf2.taf_nom }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-2">
+            Stage 1A
+        </div>
+        <div class="col col-2">
+            {{ stage1.sta_mission }}
+        </div>
+        <div class="col col-2">
+            Stage 2A
+        </div>
+        <div class="col col-2">
+            {{ stage2.sta_mission }}
+        </div>
+        <div class="col col-2">
+            Stage 3A
+        </div>
+        <div class="col col-2">
+            {{ stage3.sta_mission }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-2">
+            Adresse email
+        </div>
+        <div class="col col-2">
+            {{ etudiant.etu_mail }}
+        </div>
+        <div class="col col-2">
+            Position actuelle
+        </div>
+        <div class="col col-2">
+            {{ position.pos_nom }}
+        </div>
+        <div class="col col-2">
+             <input type="button" value="Modifier" onclick="modifierEtudiant()">
+        </div>
+    </div>
+</div>
+    <script>
+    function modifierEtudiant() {
+        console.log("On a appuyé sur le bouton Modifier")
+        var elt = document.getElementsByClassName("tableau")[0]
+        console.log(elt)
+        elt["innerHTML"] ='<form action="/view/etudiants" method="post">'+
+        '<div class="row">' +
+            ' <div class="col col-3">Nom</div>'+
+            '<div class="col col-3"><input class="form-control" type="text" name="nom"></div> '+
+            '<div class="col col-3">Prénom</div>'+
+            '<div class="col col-3"><input class="form-control" type="text" name="prenom"></div>'+
+        '</div><div class="row">'+
+            '<div class="col col-2">Promotion</div>'+
+            '<div class="col col-2"><select class="form-control" name="promotion"><option value="">Choisir...</option>{% for  promotion in promotions %}<option value="{{ promotion.pro_annee }}">{{ promotion.pro_annee }}</option>{% endfor %} </select></div>'+
+            '<div class="col col-2">TAF 2A</div>'+
+            '<div class="col col-2"><select class="form-control" name="taf1"><option value="">--Please choose an option--</option>{% for  taf in tafs %}<option value="{{ taf.taf_id }}">{{ taf.taf_nom }}</option>{% endfor %}</select> </div>'+
+            '<div class="col col-2">TAF 3A</div>'+
+            '<div class="col col-2"><select class="form-control" name="taf2"><option value="">--Please choose an option--</option>{% for  taf in tafs %}<option value="{{ taf.taf_id }}">{{ taf.taf_nom }}</option>{% endfor %} </select> </div>'+
+        '</div><div class="row">'+
+            '<div class="col col-2">Stage 1A</div>'+
+            '<div class="col col-2"><select class="form-control" name="stage1"><option value="">--Please choose an option--</option>{% for  stage in stages %}<option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>{% endfor %}</select></div>'+
+            '<div class="col col-2">Stage 2A</div>'+
+            '<div class="col col-2"><select class="form-control" name="stage2"><option value="">--Please choose an option--</option>{% for  stage in stages %}<option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>{% endfor %}</select></div>'+
+            '<div class="col col-2">Stage 3A</div>'+
+            '<div class="col col-2"><select class="form-control" name="stage3"><option value="null">--Please choose an option--</option>{% for  stage in stages %}<option value="{{ stage.sta_id }}">{{ stage.sta_mission }}</option>{% endfor %}</select></div>'+
+        '</div><div class="row">'+
+            '<div class="col col-2">Adresse email</div>'+
+            '<div class="col col-2"><input class="form-control" type="email" name="mail"></div>'+
+            '<div class="col col-2">Position actuelle</div>'+
+            '<div class="col col-2"><select class="form-control" name="position"><option value="null">--Please choose an option--</option>{% for  position in positions %}<option value="{{ position.pos_id }}">{{ position.pos_nom }}</option>{% endfor %}</select></div>'+
+            '{% if errors %}Errors:<ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}'+
+            '<div class="col col-2"> <input class="form-control" type="submit" value="Ajouter"></div>'+
+        '</div></form>'
+
+    }
+    </script>
 {% endblock %}
